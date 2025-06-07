@@ -55,12 +55,32 @@ main {
   flex: 1 1 400px;
 }
 
-.imagem-card img {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(201, 79, 101, 0.3);
+/* NOVOS ESTILOS PARA AS DUAS IMAGENS */
+.imagens-torta {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
+.imagens-torta img {
+  flex: 1 1 45%;
+  min-width: 250px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(201, 79, 101, 0.3);
+  object-fit: cover;
+  max-height: 350px;
+}
+
+/* Mantém o estilo original para telas pequenas */
+@media (max-width: 600px) {
+  .imagens-torta img {
+    flex: 1 1 100%;
+  }
+}
+
+/* Estilos existentes abaixo (mantidos sem alterações) */
 h2 {
   color: #a3334f;
   margin-bottom: 1rem;

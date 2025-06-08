@@ -17,18 +17,30 @@
 
   <main class="container">
     <section class="card imagem-card">
-      <div class="imagens-torta">
-        <br>
-       
-        <img src="foto1.jpeg" alt="Torta de Morango" />
-
-        <br>
-       
-        <img src="Foto2.jpeg" alt="Pessoa comendo torta de morango" />
+      <!-- Carrossel de Imagens -->
+      <div class="carrossel">
+        <div class="slides-container">
+          <div class="slide fade">
+            <img src="foto1.jpeg" alt="Torta de Morango">
+          </div>
+          <div class="slide fade">
+            <img src="Foto2.jpeg" alt="Pessoa comendo torta">
+          </div>
+          <div class="slide fade">
+            <img src="foto1.jpeg" alt="Torta de Morango">
+          </div>
+        </div>
         
-        <br>
-        
-        <img src="foto1.jpeg" alt="Torta de Morango" />
+        <!-- Botões de navegação -->
+        <a class="prev" onclick="moverSlides(-1)">&#10094;</a>
+        <a class="next" onclick="moverSlides(1)">&#10095;</a>
+      </div>
+      
+      <!-- Indicadores -->
+      <div class="indicadores" style="text-align:center">
+        <span class="indicador" onclick="slideAtual(1)"></span>
+        <span class="indicador" onclick="slideAtual(2)"></span>
+        <span class="indicador" onclick="slideAtual(3)"></span>
       </div>
     </section>
 
@@ -59,4 +71,54 @@
       <div class="comentarios">
         <h3>Comentários</h3>
         <form id="formComentario">
-          <textarea id="comentario" rows="3" placeholder="Deixe seu comentário..."></
+          <textarea id="comentario" rows="3" placeholder="Deixe seu comentário..."></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+        <ul id="listaComentarios"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Delícias de Morango</p>
+  </footer>
+
+  <script>
+    let slideIndex = 1;
+    mostrarSlides(slideIndex);
+
+    function moverSlides(n) {
+      mostrarSlides(slideIndex += n);
+    }
+
+    function slideAtual(n) {
+      mostrarSlides(slideIndex = n);
+    }
+
+    function mostrarSlides(n) {
+      let i;
+      const slides = document.getElementsByClassName("slide");
+      const indicadores = document.getElementsByClassName("indicador");
+      
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      
+      for (i = 0; i < indicadores.length; i++) {
+        indicadores[i].className = indicadores[i].className.replace(" ativo", "");
+      }
+      
+      slides[slideIndex-1].style.display = "block";
+      indicadores[slideIndex-1].className += " ativo";
+    }
+
+    // Troca automática a cada 5 segundos
+    setInterval(function() {
+      moverSlides(1);
+    }, 5000);
+  </script>
+</body>
+</html>
